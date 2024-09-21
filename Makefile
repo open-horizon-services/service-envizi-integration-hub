@@ -1,7 +1,7 @@
 # Integration Hub facilitates the integration of data from various external systems into the IBM Envizi ESG Suite.
 
 DOCKER_HUB_ID ?= ibmosquito
-MATCH ?= "IntegrationHub"
+MATCH ?= "OhIntegrationHub"
 TIME_OUT ?= 30
 
 INTEGRATION_HUB_API_URL ?=http://localhost:3001
@@ -10,10 +10,10 @@ INTEGRATION_HUB_API_URL ?=http://localhost:3001
 # The Open Horizon Exchange's organization ID namespace where you will be publishing files
 HZN_ORG_ID ?= examples
 
-export SERVICE_NAME ?= integration-hub
-PATTERN_NAME ?= pattern-integration-hub
-DEPLOYMENT_POLICY_NAME ?= deployment-policy-integration-hub
-NODE_POLICY_NAME ?= node-policy-integration-hub
+export SERVICE_NAME ?= oh-integration-hub
+PATTERN_NAME ?= pattern-oh-integration-hub
+DEPLOYMENT_POLICY_NAME ?= deployment-policy-oh-integration-hub
+NODE_POLICY_NAME ?= node-policy-oh-integration-hub
 export SERVICE_VERSION ?= 1.0.0
 export SERVICE_CONTAINER := $(DOCKER_HUB_ID)/$(SERVICE_NAME):$(SERVICE_VERSION)
 ARCH ?= amd64
@@ -28,7 +28,7 @@ CONTAINER_CREDS ?=
 default: build run
 
 build:
-	docker build -t $(SERVICE_CONTAINER) .
+	docker build --platform linux/arm64 -t $(SERVICE_CONTAINER) .
 
 dev: stop build
 	docker run -it -v `pwd`:/outside \
